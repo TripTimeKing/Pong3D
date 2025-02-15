@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://ddf4eqmu7a5vr"]
+
+[ext_resource type="Script" path="res://Scripts/ball.gd" id="1_l1542"]
+[ext_resource type="Texture2D" uid="uid://bqbpce304gyxo" path="res://Art/transparency.png" id="1_vvgs5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jd18h"]
+transparency = 1
+cull_mode = 2
+albedo_color = Color(0, 0.733333, 1, 1)
+albedo_texture = ExtResource("1_vvgs5")
+emission_enabled = true
+emission = Color(0, 0.733333, 1, 1)
+uv1_scale = Vector3(3, 2, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_vylmy"]
+lightmap_size_hint = Vector2i(9, 21)
+material = SubResource("StandardMaterial3D_jd18h")
+size = Vector3(0.25, 0.25, 0.25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vibn5"]
+size = Vector3(0.25, 0.25, 0.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sq4uc"]
+shading_mode = 2
+albedo_color = Color(0, 0.733333, 1, 1)
+emission_enabled = true
+emission = Color(0, 0.733333, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xlr74"]
+material = SubResource("StandardMaterial3D_sq4uc")
+size = Vector3(0.05, 0.05, 1)
+
+[node name="Ball" type="Area3D"]
+script = ExtResource("1_l1542")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+cast_shadow = 0
+mesh = SubResource("BoxMesh_vylmy")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_vibn5")
+
+[node name="Arrow" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.0147998, 0.99989, 0, -0.99989, 0.0147998, 0, 0, 0, 1, 0.00130296, -0.00254858, -0.000100255)
+mesh = SubResource("BoxMesh_xlr74")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

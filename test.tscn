@@ -1,0 +1,118 @@
+[gd_scene load_steps=10 format=3 uid="uid://dvxpg3oygofhp"]
+
+[ext_resource type="PackedScene" uid="uid://b46wmwbmgvp4m" path="res://player.tscn" id="1_uo7xt"]
+[ext_resource type="Shader" path="res://Art/Wireframe.gdshader" id="2_kdwbf"]
+[ext_resource type="PackedScene" uid="uid://ddf4eqmu7a5vr" path="res://ball.tscn" id="3_0yqsw"]
+[ext_resource type="FontFile" uid="uid://behmabh2blwnj" path="res://Fonts/data-latin.ttf" id="4_tfnac"]
+[ext_resource type="Script" path="res://Scripts/game_ui.gd" id="5_iwte0"]
+
+[sub_resource type="Environment" id="Environment_407mi"]
+background_mode = 1
+background_energy_multiplier = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1wj3i"]
+render_priority = 0
+shader = ExtResource("2_kdwbf")
+shader_parameter/albedo = Color(0, 0, 1, 0)
+shader_parameter/outline_width = 10.0
+shader_parameter/box_size = null
+
+[sub_resource type="BoxMesh" id="BoxMesh_7vnlm"]
+lightmap_size_hint = Vector2i(9, 21)
+material = SubResource("ShaderMaterial_1wj3i")
+size = Vector3(10, 10, 10)
+subdivide_width = 10
+subdivide_height = 10
+subdivide_depth = 10
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i0lxr"]
+size = Vector3(10, 10, 0.5)
+
+[node name="Test" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_407mi")
+
+[node name="VisualBox" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00201759, -0.00453377, -0.0339904)
+cast_shadow = 0
+mesh = SubResource("BoxMesh_7vnlm")
+
+[node name="Area3D" type="Area3D" parent="VisualBox"]
+
+[node name="EnemyGoal" type="CollisionShape3D" parent="VisualBox/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.25)
+shape = SubResource("BoxShape3D_i0lxr")
+
+[node name="Area3D2" type="Area3D" parent="VisualBox"]
+
+[node name="Goal" type="CollisionShape3D" parent="VisualBox/Area3D2"]
+transform = Transform3D(-0.999996, -0.000119361, 0.00292645, -0.000126858, 0.999997, -0.0025631, -0.00292613, -0.00256346, -0.999992, 0, 0, 5.25)
+shape = SubResource("BoxShape3D_i0lxr")
+
+[node name="Area3D3" type="Area3D" parent="VisualBox"]
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="VisualBox/Area3D3"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.25, 0, 0)
+shape = SubResource("BoxShape3D_i0lxr")
+
+[node name="Area3D4" type="Area3D" parent="VisualBox"]
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="VisualBox/Area3D4"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.40248, 0.0870819, -0.115479)
+shape = SubResource("BoxShape3D_i0lxr")
+
+[node name="Area3D5" type="Area3D" parent="VisualBox"]
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="VisualBox/Area3D5"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -5.25, 0)
+shape = SubResource("BoxShape3D_i0lxr")
+
+[node name="Area3D6" type="Area3D" parent="VisualBox"]
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="VisualBox/Area3D6"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5.25, 0)
+shape = SubResource("BoxShape3D_i0lxr")
+
+[node name="Ball" parent="." instance=ExtResource("3_0yqsw")]
+speed = 5
+
+[node name="Player" parent="." instance=ExtResource("1_uo7xt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.96073)
+distance_from_target = 2.0
+
+[node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource("5_iwte0")
+
+[node name="Score" type="Label" parent="UI"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -97.5
+offset_right = 97.5
+offset_bottom = 57.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("4_tfnac")
+theme_override_font_sizes/font_size = 50
+text = "SCORE: 0"
+
+[node name="Countdown" type="Label" parent="UI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.5
+offset_top = -56.5
+offset_right = 24.5
+offset_bottom = 56.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1.44392e-07, 0.778158, 0.281048, 1)
+theme_override_fonts/font = ExtResource("4_tfnac")
+theme_override_font_sizes/font_size = 200
+text = "3"
+
+[connection signal="accelerate_player" from="Ball" to="Player" method="_on_accelerate_player"]
+[connection signal="gained_point" from="Ball" to="UI" method="_on_gained_point"]
+[connection signal="game_over" from="Ball" to="UI" method="_on_game_over"]

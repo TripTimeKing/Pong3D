@@ -1,0 +1,64 @@
+[gd_scene load_steps=3 format=3 uid="uid://ng1ngnhnln1g"]
+
+[ext_resource type="FontFile" uid="uid://behmabh2blwnj" path="res://Fonts/data-latin.ttf" id="1_b2dkb"]
+[ext_resource type="Script" path="res://Scripts/menu.gd" id="1_sqe2d"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sqe2d")
+
+[node name="Background" type="ColorRect" parent="."]
+z_index = -10
+layout_mode = 0
+offset_right = 1170.0
+offset_bottom = 668.0
+color = Color(0.3458, 0.37373, 0.38, 1)
+
+[node name="Main" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -146.5
+offset_top = -91.0
+offset_right = 146.5
+offset_bottom = 91.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="Title" type="Label" parent="Main"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_b2dkb")
+theme_override_font_sizes/font_size = 100
+text = "PONG3D"
+
+[node name="Play" type="Button" parent="Main"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_b2dkb")
+theme_override_font_sizes/font_size = 50
+text = "PLAY"
+
+[node name="Highscore" type="Label" parent="Main"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_b2dkb")
+theme_override_font_sizes/font_size = 25
+text = "Highscore: 0"
+horizontal_alignment = 1
+
+[node name="LastScore" type="Label" parent="Main"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_b2dkb")
+theme_override_font_sizes/font_size = 25
+text = "Last score: 0"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="Main/Play" to="." method="_on_play_pressed"]
