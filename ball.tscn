@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://ddf4eqmu7a5vr"]
+[gd_scene load_steps=11 format=3 uid="uid://ddf4eqmu7a5vr"]
 
 [ext_resource type="Script" path="res://Scripts/ball.gd" id="1_l1542"]
 [ext_resource type="Texture2D" uid="uid://bqbpce304gyxo" path="res://Art/transparency.png" id="1_vvgs5"]
+[ext_resource type="AudioStream" uid="uid://br5n3akusnec1" path="res://Sounds/lose.mp3" id="3_mj87y"]
+[ext_resource type="AudioStream" uid="uid://c3q5aj6pqny33" path="res://Sounds/lose2.wav" id="4_r5w48"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jd18h"]
 transparency = 1
@@ -30,6 +32,12 @@ emission = Color(0, 0.733333, 1, 1)
 material = SubResource("StandardMaterial3D_sq4uc")
 size = Vector3(0.05, 0.05, 1)
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_g1nt6"]
+random_pitch = 2.0
+random_volume_offset_db = 2.0
+streams_count = 1
+stream_0/stream = ExtResource("3_mj87y")
+
 [node name="Ball" type="Area3D"]
 script = ExtResource("1_l1542")
 
@@ -44,5 +52,11 @@ shape = SubResource("BoxShape3D_vibn5")
 [node name="Arrow" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.0147998, 0.99989, 0, -0.99989, 0.0147998, 0, 0, 0, 1, 0.00130296, -0.00254858, -0.000100255)
 mesh = SubResource("BoxMesh_xlr74")
+
+[node name="Bonk" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_g1nt6")
+
+[node name="Lose" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_r5w48")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://ng1ngnhnln1g"]
+[gd_scene load_steps=4 format=3 uid="uid://ng1ngnhnln1g"]
 
 [ext_resource type="FontFile" uid="uid://behmabh2blwnj" path="res://Fonts/data-latin.ttf" id="1_b2dkb"]
 [ext_resource type="Script" path="res://Scripts/menu.gd" id="1_sqe2d"]
+[ext_resource type="AudioStream" uid="uid://ck5dsxhnfxg3" path="res://Sounds/click.wav" id="3_c8xqi"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -60,5 +61,8 @@ theme_override_fonts/font = ExtResource("1_b2dkb")
 theme_override_font_sizes/font_size = 25
 text = "Last score: 0"
 horizontal_alignment = 1
+
+[node name="Click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_c8xqi")
 
 [connection signal="pressed" from="Main/Play" to="." method="_on_play_pressed"]

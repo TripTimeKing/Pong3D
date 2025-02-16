@@ -13,7 +13,8 @@ config_version=5
 config/name="Pong3D"
 run/main_scene="res://menu.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
-config/icon="res://Art/icon.svg"
+config/icon="res://Art/pong3dIcon.svg"
+config/windows_native_icon="res://Art/pong3dIcon.ico"
 
 [autoload]
 
