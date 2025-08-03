@@ -1,35 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://ddf4eqmu7a5vr"]
+[gd_scene load_steps=9 format=3 uid="uid://ddf4eqmu7a5vr"]
 
-[ext_resource type="Script" path="res://Scripts/ball.gd" id="1_l1542"]
-[ext_resource type="Texture2D" uid="uid://bqbpce304gyxo" path="res://Art/transparency.png" id="1_vvgs5"]
-[ext_resource type="AudioStream" uid="uid://br5n3akusnec1" path="res://Sounds/lose.mp3" id="3_mj87y"]
-[ext_resource type="AudioStream" uid="uid://c3q5aj6pqny33" path="res://Sounds/lose2.wav" id="4_r5w48"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jd18h"]
-transparency = 1
-cull_mode = 2
-albedo_color = Color(0, 0.733333, 1, 1)
-albedo_texture = ExtResource("1_vvgs5")
-emission_enabled = true
-emission = Color(0, 0.733333, 1, 1)
-uv1_scale = Vector3(3, 2, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_vylmy"]
-lightmap_size_hint = Vector2i(9, 21)
-material = SubResource("StandardMaterial3D_jd18h")
-size = Vector3(0.25, 0.25, 0.25)
+[ext_resource type="Script" uid="uid://bjg0v0fka6wpm" path="res://Scripts/ball.gd" id="1_l1542"]
+[ext_resource type="ArrayMesh" uid="uid://c8l5262hmyyga" path="res://Art/wireframe_cube.obj" id="2_hgol0"]
+[ext_resource type="Material" uid="uid://flded1eh2gf6" path="res://Art/blue.tres" id="2_n5601"]
+[ext_resource type="AudioStream" uid="uid://br5n3akusnec1" path="res://Sounds/bounce.mp3" id="3_mj87y"]
+[ext_resource type="AudioStream" uid="uid://c3q5aj6pqny33" path="res://Sounds/lose.wav" id="4_r5w48"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vibn5"]
 size = Vector3(0.25, 0.25, 0.25)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sq4uc"]
-shading_mode = 2
-albedo_color = Color(0, 0.733333, 1, 1)
-emission_enabled = true
-emission = Color(0, 0.733333, 1, 1)
-
 [sub_resource type="BoxMesh" id="BoxMesh_xlr74"]
-material = SubResource("StandardMaterial3D_sq4uc")
+material = ExtResource("2_n5601")
 size = Vector3(0.05, 0.05, 1)
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_g1nt6"]
@@ -42,8 +23,10 @@ stream_0/stream = ExtResource("3_mj87y")
 script = ExtResource("1_l1542")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.125, 0, 0, 0, 0.125, 0, 0, 0, 0.125, 0, 0, 0)
+material_override = ExtResource("2_n5601")
 cast_shadow = 0
-mesh = SubResource("BoxMesh_vylmy")
+mesh = ExtResource("2_hgol0")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

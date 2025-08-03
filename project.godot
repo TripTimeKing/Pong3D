@@ -11,14 +11,18 @@ config_version=5
 [application]
 
 config/name="Pong3D"
-run/main_scene="res://menu.tscn"
-config/features=PackedStringArray("4.3", "Mobile")
+run/main_scene="uid://ng1ngnhnln1g"
+config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://Art/pong3dIcon.svg"
 config/windows_native_icon="res://Art/pong3dIcon.ico"
 
 [autoload]
 
 GameState="*res://Scripts/game_state.gd"
+
+[display]
+
+window/stretch/mode="canvas_items"
 
 [editor]
 
@@ -59,3 +63,4 @@ move_right={
 [rendering]
 
 renderer/rendering_method="mobile"
+viewport/hdr_2d=true

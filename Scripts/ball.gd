@@ -20,7 +20,7 @@ func reset_game():
 	await get_tree().create_timer(3.0).timeout
 	isMoving = true
 	$Arrow.visible = false
-	
+
 func end_game():
 	game_over.emit()
 	GameState.score = localScore
@@ -29,36 +29,29 @@ func end_game():
 	speed = 1
 	$Lose.play()
 	await $Lose.finished
-	get_tree().change_scene_to_file("res://menu.tscn")
-	
+	get_tree().change_scene_to_file("res://UI/title.tscn")
+
 
 func _ready() -> void:
+	print(GameState.settings["sound"])
+	$Bonk.volume_linear = GameState.settings["sound"] / 10
+	$Lose.volume_linear = GameState.settings["sound"] / 10
 	reset_game()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
 func _physics_process(delta: float) -> void:
-	if not isMoving: return
+	if not isMoving or GameState.paused: return
 	position = position + direction * delta * speed
 
 func _on_area_entered(hitArea: Area3D) -> void:
 	var playerNode : Area3D = get_node("../Player")
 	var area = hitArea.get_child(0)
-	#if area.get_parent() == playerNode:
-		#$Bonk.play()
-		#var maxRatio = playerSize/2 + Vector3(0.25,0.25,0.25)
-		#var ratio = (playerNode.position - position) / maxRatio
-		#var x = ratio.x
-		#var zx = 1 - ratio.x
-		#var y =  ratio.y
-		#var zy = 1 - ratio.y
-		#var newDir = (Vector3(-x, 0, -zx) + Vector3(0, -y, -zy)).normalized()
-		#direction = newDir
 	var newDir = direction.bounce(-hitArea.get_child(0).global_basis.z)
 	direction = newDir
 	if area.name == "EnemyGoal":
 		$Bonk.play()
 		gained_point.emit()
-		speed += 0.5
+		speed += 0.1
 		localScore += 1
 		if localScore % 15 == 0:
 			accelerate_player.emit()

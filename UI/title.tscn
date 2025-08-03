@@ -1,0 +1,244 @@
+[gd_scene load_steps=12 format=3 uid="uid://ng1ngnhnln1g"]
+
+[ext_resource type="FontFile" uid="uid://behmabh2blwnj" path="res://Fonts/data-latin.ttf" id="1_b2dkb"]
+[ext_resource type="Theme" uid="uid://de8o8117a6fjq" path="res://Art/default.tres" id="1_cb2bp"]
+[ext_resource type="Script" uid="uid://vepfu2egslx" path="res://Scripts/menu.gd" id="1_sqe2d"]
+[ext_resource type="AudioStream" uid="uid://ck5dsxhnfxg3" path="res://Sounds/click.wav" id="3_c8xqi"]
+[ext_resource type="Texture2D" uid="uid://b3ybuy5esvvfs" path="res://Art/grid.png" id="4_s15np"]
+[ext_resource type="Texture2D" uid="uid://dtdoxdkfx4m3p" path="res://Art/pong3dTutorialWASD.svg" id="6_2yo02"]
+[ext_resource type="Texture2D" uid="uid://b175wyo8a24j2" path="res://Art/fox.png" id="6_naaye"]
+[ext_resource type="Texture2D" uid="uid://i5qmp67w6rdi" path="res://Art/pong3dTutorialARROW.svg" id="7_naaye"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_cb2bp"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_fhifq"]
+font_size = 30
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_bw7ep"]
+color = Color(0.635294, 0.635294, 0.635294, 1)
+thickness = 2
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_cb2bp")
+script = ExtResource("1_sqe2d")
+metadata/_edit_horizontal_guides_ = [-235.0]
+
+[node name="Click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_c8xqi")
+
+[node name="grid1" type="TextureRect" parent="."]
+modulate = Color(0.385493, 0.385492, 0.385492, 1)
+z_index = -4
+layout_mode = 0
+offset_left = -433.0
+offset_top = -8.00024
+offset_right = 923.0
+offset_bottom = 1116.0
+rotation = -0.349066
+scale = Vector2(1.2779, 1.15241)
+mouse_filter = 2
+texture = ExtResource("4_s15np")
+expand_mode = 3
+stretch_mode = 1
+
+[node name="Main" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Main" type="VBoxContainer" parent="Main"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 30.0
+offset_top = 80.0
+offset_right = 378.0
+offset_bottom = 477.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="Title" type="Label" parent="Main/Main"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_b2dkb")
+theme_override_font_sizes/font_size = 100
+text = "PONG3D"
+horizontal_alignment = 1
+
+[node name="Score" type="HBoxContainer" parent="Main/Main"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Highscore" type="Label" parent="Main/Main/Score"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_b2dkb")
+theme_override_font_sizes/font_size = 25
+text = "Highscore: 0"
+horizontal_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="Main/Main/Score"]
+layout_mode = 2
+
+[node name="LastScore" type="Label" parent="Main/Main/Score"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_b2dkb")
+theme_override_font_sizes/font_size = 25
+text = "Last score: 0"
+horizontal_alignment = 1
+
+[node name="Play" type="Button" parent="Main/Main"]
+z_index = 2
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_b2dkb")
+theme_override_font_sizes/font_size = 50
+text = "PLAY"
+
+[node name="Settings" type="Button" parent="Main/Main"]
+visible = false
+z_index = 2
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_b2dkb")
+theme_override_font_sizes/font_size = 50
+text = "SETTINGS"
+
+[node name="Controls" type="Button" parent="Main/Main"]
+visible = false
+z_index = 2
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_b2dkb")
+theme_override_font_sizes/font_size = 50
+text = "CONTROLS"
+
+[node name="Exit" type="Button" parent="Main/Main"]
+z_index = 2
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_b2dkb")
+theme_override_font_sizes/font_size = 50
+text = "EXIT"
+
+[node name="Panel" type="Panel" parent="Main"]
+z_index = -1
+layout_mode = 0
+offset_left = 25.0
+offset_top = 35.0
+offset_right = 425.0
+offset_bottom = 585.0
+mouse_filter = 2
+theme = ExtResource("1_cb2bp")
+
+[node name="Settings" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="Settings"]
+z_index = -1
+layout_mode = 0
+offset_left = 475.0
+offset_top = 100.0
+offset_right = 1075.0
+offset_bottom = 550.0
+mouse_filter = 2
+theme = ExtResource("1_cb2bp")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Settings"]
+layout_mode = 0
+offset_left = 500.0
+offset_top = 125.0
+offset_right = 1050.0
+offset_bottom = 525.0
+alignment = 1
+
+[node name="Settings" type="VBoxContainer" parent="Settings/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="Settings/HBoxContainer/Settings"]
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("1_cb2bp")
+text = "SETTINGS"
+label_settings = SubResource("LabelSettings_cb2bp")
+horizontal_alignment = 1
+
+[node name="Sound" type="HBoxContainer" parent="Settings/HBoxContainer/Settings"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/HBoxContainer/Settings/Sound"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "SOUND     "
+
+[node name="HSlider" type="HSlider" parent="Settings/HBoxContainer/Settings/Sound"]
+custom_minimum_size = Vector2(155, 60)
+layout_mode = 2
+max_value = 10.0
+value = 10.0
+ticks_on_borders = true
+
+[node name="RotateCamera" type="HBoxContainer" parent="Settings/HBoxContainer/Settings"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/HBoxContainer/Settings/RotateCamera"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Rotate Camera          "
+
+[node name="CheckBox" type="CheckBox" parent="Settings/HBoxContainer/Settings/RotateCamera"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Settings/HBoxContainer/Settings"]
+layout_mode = 2
+texture = ExtResource("6_naaye")
+expand_mode = 5
+
+[node name="VSeparator" type="VSeparator" parent="Settings/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Controls" type="VBoxContainer" parent="Settings/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Title" type="Label" parent="Settings/HBoxContainer/Controls"]
+layout_mode = 2
+text = "CONTROLS"
+label_settings = SubResource("LabelSettings_fhifq")
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Settings/HBoxContainer/Controls"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("6_2yo02")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HSeparator" type="HSeparator" parent="Settings/HBoxContainer/Controls"]
+layout_mode = 2
+theme_override_constants/separation = 0
+theme_override_styles/separator = SubResource("StyleBoxLine_bw7ep")
+
+[node name="TextureRect2" type="TextureRect" parent="Settings/HBoxContainer/Controls"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("7_naaye")
+expand_mode = 1
+stretch_mode = 5
+
+[connection signal="pressed" from="Main/Main/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Main/Main/Exit" to="." method="_on_exit_pressed"]
+[connection signal="drag_ended" from="Settings/HBoxContainer/Settings/Sound/HSlider" to="." method="_on_h_slider_drag_ended"]
+[connection signal="toggled" from="Settings/HBoxContainer/Settings/RotateCamera/CheckBox" to="." method="_on_check_box_toggled"]

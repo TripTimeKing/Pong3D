@@ -1,34 +1,28 @@
-[gd_scene load_steps=6 format=3 uid="uid://b46wmwbmgvp4m"]
+[gd_scene load_steps=5 format=3 uid="uid://b46wmwbmgvp4m"]
 
-[ext_resource type="Script" path="res://Scripts/player.gd" id="1_4pv26"]
-[ext_resource type="Texture2D" uid="uid://bqbpce304gyxo" path="res://Art/transparency.png" id="1_gh6d0"]
+[ext_resource type="Script" uid="uid://d2x348vd5qrh0" path="res://Scripts/player.gd" id="1_4pv26"]
+[ext_resource type="ArrayMesh" uid="uid://c8l5262hmyyga" path="res://Art/wireframe_cube.obj" id="2_onrkg"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_q1h7v"]
 size = Vector3(1, 1, 0.3)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wpmt6"]
-transparency = 1
-cull_mode = 2
-albedo_texture = ExtResource("1_gh6d0")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i3pqv"]
+albedo_color = Color(0.89059, 0.89059, 0.89059, 1)
 emission_enabled = true
-emission = Color(1, 1, 1, 1)
-uv1_scale = Vector3(3, 2, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_3rbti"]
-lightmap_size_hint = Vector2i(9, 21)
-material = SubResource("StandardMaterial3D_wpmt6")
-size = Vector3(1, 1, 0.2)
+emission = Color(0.890196, 0.890196, 0.890196, 1)
 
 [node name="Player" type="Area3D"]
 script = ExtResource("1_4pv26")
+distance_from_target = 100.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_q1h7v")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.03945)
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_i3pqv")
 cast_shadow = 0
-mesh = SubResource("BoxMesh_3rbti")
+mesh = ExtResource("2_onrkg")
 skeleton = NodePath("../AnimatableBody3D")
+
+[node name="Camera3D" type="Camera3D" parent="."]

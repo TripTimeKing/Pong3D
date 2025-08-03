@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://ce53hyojpk2rb"]
+
+[ext_resource type="Script" uid="uid://cfkihai8g6kry" path="res://menu_bg.gd" id="1_4hy44"]
+[ext_resource type="PackedScene" uid="uid://ng1ngnhnln1g" path="res://UI/title.tscn" id="1_lti8b"]
+[ext_resource type="Material" uid="uid://dbdkiouvppr23" path="res://Art/white_filled.tres" id="3_4hy44"]
+[ext_resource type="ArrayMesh" uid="uid://cyxmv773bp6xy" path="res://Art/cube_filled.obj" id="4_ytr4m"]
+
+[sub_resource type="Environment" id="Environment_4hy44"]
+background_mode = 1
+background_energy_multiplier = 0.0
+
+[node name="Menu" type="Node3D"]
+script = ExtResource("1_4hy44")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Menu" parent="CanvasLayer" instance=ExtResource("1_lti8b")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.976411, 0.152834, 0.152524, 0.176898, 0.971267, 0.159208, -0.123809, 0.182434, -0.975392, 2.22549, 6.09451, -2.17564)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_4hy44")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 2.5, 0, 0, 0, 1, 0, 1.97611, 0)
+visible = false
+material_override = ExtResource("3_4hy44")
+cast_shadow = 0
+mesh = ExtResource("4_ytr4m")
